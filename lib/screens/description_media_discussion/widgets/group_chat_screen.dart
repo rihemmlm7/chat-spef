@@ -302,16 +302,24 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       }
     } else {
       return Container(
+        
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.75,
         ),
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(20),
+      topRight: Radius.circular(20),
+      bottomLeft: Radius.circular(isMe ? 20 : 0),
+      bottomRight: Radius.circular(isMe ? 0 : 20),
+                
+                ),
           color: isMe ? const Color(0xFFF4C534) : Colors.grey[200],
         ),
         child: Column(
+          
           crossAxisAlignment:
               isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
@@ -336,7 +344,9 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
+        
         children: <Widget>[
           Expanded(
             child: ListView.builder(
@@ -362,7 +372,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
             child: Row(
               children: <Widget>[
                 IconButton(
@@ -370,14 +380,17 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                   onPressed: () => _showOptions(context),
                 ),
                 Expanded(
+                  
                   child: TextField(
+                    
                     controller: _controller,
                     decoration: InputDecoration(
                       hintText: "Send a message...",
-                      fillColor: Colors.grey[100],
+                      fillColor: Colors.grey[230],
+                      contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                       filled: true,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
                     ),

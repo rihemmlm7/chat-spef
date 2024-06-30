@@ -70,6 +70,7 @@ class _GroupsPageWidgetState extends State<GroupsPageWidget> {
         leading: Stack(
           children: [
             const CircleAvatar(
+              backgroundColor: const Color(0xFFDEDEDE), 
               backgroundImage: AssetImage('assets/images/multiple-users-silhouette.png'),
             ),
             Positioned(

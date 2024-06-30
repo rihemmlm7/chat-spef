@@ -109,13 +109,14 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: Color(0xFF2A343D)),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title:  const Text( 'Nom de user '),
+        title: const Text('Nom d\'utilisateur'),
         elevation: 3,
         shadowColor: Colors.black,
       ),
@@ -166,11 +167,17 @@ class _ChatScreenState extends State<ChatScreen> {
                 margin: const EdgeInsets.all(10),
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: isMe ? const Color(0xFFF4C534) : Colors.grey[200],
+                borderRadius: BorderRadius.only(
+           topLeft: Radius.circular(20),
+      topRight: Radius.circular(20),
+      bottomLeft: Radius.circular(isMe ? 20 : 0),
+      bottomRight: Radius.circular(isMe ? 0 : 20),
+                
                 ),
+        color: isMe ? const Color(0xFFF4C534) : Colors.grey[200],
+  ),
                 child: Column(
-                crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                crossAxisAlignment: isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
                 children: [
                 Text(
                 msg.messageContent,
@@ -203,22 +210,27 @@ class _ChatScreenState extends State<ChatScreen> {
 
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+            
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
             child: Row(
+              
               children: <Widget>[
+                
                 IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () => _showOptions(context),
                 ),
                 Expanded(
+                  
                   child: TextField(
                     controller: _controller,
                     decoration: InputDecoration(
                       hintText: "Send a message...",
-                      fillColor: Colors.grey[100],
+                      fillColor: Colors.grey[230],
                       filled: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
                     ),

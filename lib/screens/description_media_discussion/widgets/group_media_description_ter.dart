@@ -21,6 +21,7 @@ class PdfListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, 
       body: ListView.builder(
         itemCount: pdfFiles.length,
         itemBuilder: (context, index) {
