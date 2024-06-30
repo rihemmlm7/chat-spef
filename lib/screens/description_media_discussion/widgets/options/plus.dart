@@ -112,18 +112,17 @@ class _PlusOptionState extends State<PlusOption> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        backgroundColor: Colors.white,
+
+        backgroundColor:Colors.grey[50],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: Color(0xFF2A343D)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: GestureDetector(
           onTap: _navigateToChangeGroupName,
-          child: const Text(
-            'Nom de group',
-            style: TextStyle(color: Color(0xFF2A343D)),
-          ),
+       
         ),
         actions: <Widget>[
           PopupMenuButton<String>(
@@ -148,7 +147,7 @@ class _PlusOptionState extends State<PlusOption> {
             icon: const Icon(Icons.more_vert, color: Color(0xFF2A343D)),
           ),
         ],
-        elevation: 3,
+        elevation: 0,
         shadowColor: Colors.black,
       ),
       body: SingleChildScrollView(
