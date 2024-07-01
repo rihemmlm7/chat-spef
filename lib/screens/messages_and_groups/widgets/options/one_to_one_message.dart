@@ -168,8 +168,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-           topLeft: Radius.circular(20),
-      topRight: Radius.circular(20),
+           topLeft: const Radius.circular(20),
+      topRight: const Radius.circular(20),
       bottomLeft: Radius.circular(isMe ? 20 : 0),
       bottomRight: Radius.circular(isMe ? 0 : 20),
                 
@@ -228,7 +228,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       hintText: "Send a message...",
                       fillColor: Colors.grey[230],
                       filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,

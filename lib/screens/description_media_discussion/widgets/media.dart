@@ -47,18 +47,22 @@ class _GroupMediaWidgetState extends State<GroupMediaWidget>
           children: [
             const SizedBox(height: 16.0),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0),
+              margin: const EdgeInsets.symmetric(horizontal: 12.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                color: Colors.grey[200],
+                color: Color(0xFFF4C534),
               ),
               child: TabBar(
                 controller: _tabController,
-                indicator: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
+                
                 labelColor: Colors.black,
+                  indicator: UnderlineTabIndicator(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                  width: 3.0,
+                ),
+                insets: EdgeInsets.symmetric(horizontal: 100.0), // Adjust this value for the desired length
+              ),
                 tabs: const [
                   Tab(text: 'Images'),
                   Tab(text: 'Vidéos'),

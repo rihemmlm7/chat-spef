@@ -114,15 +114,17 @@ class _PlusOptionState extends State<PlusOption> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-
-        backgroundColor:Colors.grey[50],
+        backgroundColor: Colors.grey[50],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: Color(0xFF2A343D)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: GestureDetector(
           onTap: _navigateToChangeGroupName,
-       
+          child: const Text(
+            '',
+            style: TextStyle(color: Color(0xFF2A343D)),
+          ),
         ),
         actions: <Widget>[
           PopupMenuButton<String>(

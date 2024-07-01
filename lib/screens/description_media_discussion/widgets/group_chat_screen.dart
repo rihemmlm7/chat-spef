@@ -310,8 +310,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(20),
-      topRight: Radius.circular(20),
+      topLeft: const Radius.circular(20),
+      topRight: const Radius.circular(20),
       bottomLeft: Radius.circular(isMe ? 20 : 0),
       bottomRight: Radius.circular(isMe ? 0 : 20),
                 
@@ -387,7 +387,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                     decoration: InputDecoration(
                       hintText: "Send a message...",
                       fillColor: Colors.grey[230],
-                      contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -418,4 +418,4 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 }
 
-void main() => runApp(MaterialApp(home: GroupChatScreen()));
+void main() => runApp(const MaterialApp(home: GroupChatScreen()));
