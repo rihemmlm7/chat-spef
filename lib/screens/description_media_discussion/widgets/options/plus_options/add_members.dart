@@ -46,7 +46,9 @@ class _AddMembersScreenState extends State<AddMembersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         title: const Text('Ajouter des membres'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -63,7 +65,9 @@ class _AddMembersScreenState extends State<AddMembersScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: Container(
+      color: Colors.white, 
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
@@ -101,6 +105,6 @@ class _AddMembersScreenState extends State<AddMembersScreen> {
           ),
         ],
       ),
-    );
-  }
-}
+    ),
+  );
+  }}

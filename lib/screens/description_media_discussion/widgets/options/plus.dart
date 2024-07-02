@@ -108,8 +108,7 @@ class _PlusOptionState extends State<PlusOption> {
       ),
     ));
   }
-
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -205,117 +204,125 @@ class _PlusOptionState extends State<PlusOption> {
                   },
                   hasShadow: true,
                 ),
-                SizedBox(
-                  height: 150, // Fixed height for the list of members
-                  child: ListView.builder(
-                    itemCount: contacts.length,
-                    itemBuilder: (context, index) {
-                      final contact = contacts[index];
-                      return ListTile(
-                        leading: const CircleAvatar(
-                          child: Icon(Icons.person),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
-                        title: Text(contact['name']!),
-                        subtitle: Text(contact['status']!),
-                        onTap: () {},
-                      );
-                    },
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            ' Membres (${contacts.length})', // Displaying number of members
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          // Add any other widgets you might need on the same row
+        ],
+      ),
+    ),
+    SizedBox(
+      height: 150,
+      child: ListView.builder(
+        itemCount: contacts.length,
+        itemBuilder: (context, index) {
+          final contact = contacts[index];
+          return ListTile(
+            leading: const CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+            title: Text(contact['name']!),
+            subtitle: Text(contact['status']!),
+            onTap: () {
+              // Handle member tap
+            },
+          );
+        },
+      ),
+    ),
+  ],
+),
+
                   ),
                 ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SettingTile(
-                  icon: Icons.supervised_user_circle,
-                  title: 'Membres',
-                  subtitle: 'la liste du tout les membres de groupe ',
-                  onTap: () {},
-                  hasShadow: true,
-                ),
-                SizedBox(
-                  height: 150, // Fixed height for the list of members
-                  child: ListView.builder(
-                    itemCount: contacts.length,
-                    itemBuilder: (context, index) {
-                      final contact = contacts[index];
-                      return ListTile(
-                        leading: const CircleAvatar(
-                          child: Icon(Icons.person),
-                        ),
-                        title: Text(contact['name']!),
-                        subtitle: Text(contact['status']!),
-                        onTap: () {},
-                      );
-                    },
+                const SizedBox(height: 16),
+                ListTile(
+                  leading: const Icon(Icons.person_add,
+                      color: Color.fromARGB(255, 244, 197, 52)),
+                  title: const Text(
+                    'Ajouter un membre',
+                    style:
+                        TextStyle(color: Color.fromARGB(255, 244, 197, 52)),
                   ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AddMembersScreen(),
+                    ));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.exit_to_app, color: Colors.red),
+                  title: const Text('Quitter le groupe',
+                      style: TextStyle(color: Colors.red)),
+                  onTap: () {
+                    // Handle "Quitter le groupe"
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.thumb_down, color: Colors.red),
+                  title: const Text('Signaler le groupe',
+                      style: TextStyle(color: Colors.red)),
+                  onTap: () {
+                    // Handle "Signaler le groupe"
+                  },
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            ListTile(
-              leading: const Icon(Icons.person_add,
-                  color: Color.fromARGB(255, 244, 197, 52)),
-              title: const Text(
-                'Ajouter un membre',
-                style: TextStyle(color: Color.fromARGB(255, 244, 197, 52)),
-              ),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AddMembersScreen(),
-                ));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.exit_to_app, color: Colors.red),
-              title: const Text(
-                'Quitter le groupe',
-                style: TextStyle(color: Colors.red),
-              ),
-              onTap: () {
-                // Handle "Quitter le groupe"
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.thumb_down, color: Colors.red),
-              title: const Text(
-                'Signaler le groupe',
-                style: TextStyle(color: Colors.red),
-              ),
-              onTap: () {
-                // Handle "Signaler le groupe"
-              },
             ),
           ],
         ),
       ),
     );
   }
-
-  void handleMenuSelection(BuildContext context, String choice) {
-    // This function can handle various actions based on the menu choice
-    // Example of navigating or displaying a message
-    switch (choice) {
-      case 'Ajouter des membres':
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => AddMembersScreen(),
-        ));
-        break;
-      case 'Changer le nom du groupe':
-        _navigateToChangeGroupName();
-        break;
-      case 'Autorisations du groupe':
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => GroupPermissionsScreen(),
-        ));
-        break;
-      default:
-        print('Unknown option: $choice');
-    }
+void handleMenuSelection(BuildContext context, String choice) {
+  // This function can handle various actions based on the menu choice
+  // Example of navigating or displaying a message
+  switch (choice) {
+    case 'Ajouter des membres':
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => AddMembersScreen(),
+      ));
+      break;
+    case 'Changer le nom du groupe':
+      _navigateToChangeGroupName();
+      break;
+    case 'Autorisations du groupe':
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => GroupPermissionsScreen(),
+      ));
+      break;
+    default:
+      print('Unknown option: $choice');
   }
+}
 }
 
 class GroupActionButton extends StatelessWidget {
