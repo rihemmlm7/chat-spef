@@ -237,7 +237,9 @@ class _PlusOptionState extends State<PlusOption> {
                               ),
                               Spacer(),
                               IconButton(
+                                
                                 icon: Icon(Icons.edit),
+                                color: Colors.grey,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => const AddClientScreen(),
@@ -333,6 +335,7 @@ class _PlusOptionState extends State<PlusOption> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(
+                     margin: const EdgeInsets.only(bottom: 16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -380,6 +383,7 @@ class _PlusOptionState extends State<PlusOption> {
                             // Handle "Signaler le groupe"
                           },
                         ),
+                        
                       ],
                     ),
                   ),

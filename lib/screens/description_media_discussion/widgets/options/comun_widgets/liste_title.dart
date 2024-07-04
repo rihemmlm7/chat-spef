@@ -30,6 +30,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ));
           },
+           hasShadow: true,
         ),
         SettingTile(
           icon: Icons.admin_panel_settings_rounded,
@@ -44,6 +45,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ));
           },
+           hasShadow: true,
         ),
         /*Obx(
           () => SettingTile(
@@ -75,6 +77,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ));
           },
+           hasShadow: true,
         ),
         SettingTile(
           icon: Icons.file_open,
@@ -89,6 +92,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ));
           },
+           hasShadow: true,
         ),
         SettingTile(
           icon: Icons.settings,
