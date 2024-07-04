@@ -20,7 +20,7 @@ class _PlusOptionState extends State<PlusOption> {
   File? _groupImage;
   final picker = ImagePicker();
 
-  final List<Map<String, String>> contacts = [
+  final List<Map<String, String>> interesses = [
     {
       'name': 'Maria',
       'status': 'Le rôle de cet membre.',
@@ -55,7 +55,7 @@ class _PlusOptionState extends State<PlusOption> {
     },
   ];
 
-  final List<Map<String, String>> client = [
+  final List<Map<String, String>> members = [
     {
       'name': 'Maria',
       'status': 'Indice sur le client',
@@ -108,7 +108,8 @@ class _PlusOptionState extends State<PlusOption> {
       ),
     ));
   }
-@override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -121,14 +122,13 @@ class _PlusOptionState extends State<PlusOption> {
         title: GestureDetector(
           onTap: _navigateToChangeGroupName,
           child: const Text(
-            '',
+            'Nom du groupe',
             style: TextStyle(color: Color(0xFF2A343D)),
           ),
         ),
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: (String result) {
-              // Action based on selection
               handleMenuSelection(context, result);
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -149,7 +149,6 @@ class _PlusOptionState extends State<PlusOption> {
           ),
         ],
         elevation: 0,
-        shadowColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -170,7 +169,7 @@ class _PlusOptionState extends State<PlusOption> {
             const SizedBox(height: 10),
             const Center(
               child: Text(
-                'Test',
+                'Nom du groupe',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
@@ -179,7 +178,7 @@ class _PlusOptionState extends State<PlusOption> {
               child: Text('Groupe • 2 membres'),
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GroupActionButton(icon: Icons.person_add, label: 'Ajouter'),
@@ -192,19 +191,6 @@ class _PlusOptionState extends State<PlusOption> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SettingTile(
-                  icon: Icons.supervised_user_circle,
-                  suffixIcon: Icons.edit,
-                  title: 'Les intéressés',
-                  subtitle: 'la liste du tout Les intéressés',
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AddClientScreen(),
-                    ));
-                  },
-                  hasShadow: true,
-                ),
-                const SizedBox(height: 12),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(
@@ -212,88 +198,191 @@ class _PlusOptionState extends State<PlusOption> {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withOpacity(0.3),
                           spreadRadius: 3,
                           blurRadius: 7,
-                          offset:
-                              const Offset(0, 3), // changes position of shadow
+                          offset: const Offset(0, 0), // changes position of shadow
                         ),
                       ],
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            ' Membres (${contacts.length})', // Displaying number of members
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          // Add any other widgets you might need on the same row
-        ],
-      ),
-    ),
-    SizedBox(
-      height: 150,
-      child: ListView.builder(
-        itemCount: contacts.length,
-        itemBuilder: (context, index) {
-          final contact = contacts[index];
-          return ListTile(
-            leading: const CircleAvatar(
-              child: Icon(Icons.person),
-            ),
-            title: Text(contact['name']!),
-            subtitle: Text(contact['status']!),
-            onTap: () {
-              // Handle member tap
-            },
-          );
-        },
-      ),
-    ),
-  ],
-),
-
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(Icons.supervised_user_circle,  color: Color.fromARGB(255, 244, 197, 52),),
+                              SizedBox(width: 8),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Les intéressés (${interesses.length})',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Liste de tous les intéressés',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const AddClientScreen(),
+                                  ));
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                            itemCount: interesses.length,
+                            itemBuilder: (context, index) {
+                              final interest = interesses[index];
+                              return ListTile(
+                                leading: const CircleAvatar(
+                                  child: Icon(Icons.person),
+                                ),
+                                title: Text(interest['name']!),
+                                subtitle: Text(interest['status']!),
+                                onTap: () {
+                                  // Handle member tap
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                ListTile(
-                  leading: const Icon(Icons.person_add,
-                      color: Color.fromARGB(255, 244, 197, 52)),
-                  title: const Text(
-                    'Ajouter un membre',
-                    style:
-                        TextStyle(color: Color.fromARGB(255, 244, 197, 52)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 7,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Membres (${members.length})', // Displaying number of members
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              // Add any other widgets you might need on the same row
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                            itemCount: members.length,
+                            itemBuilder: (context, index) {
+                              final member = members[index];
+                              return ListTile(
+                                leading: const CircleAvatar(
+                                  child: Icon(Icons.person),
+                                ),
+                                title: Text(member['name']!),
+                                subtitle: Text(member['status']!),
+                                onTap: () {
+                                  // Handle member tap
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AddMembersScreen(),
-                    ));
-                  },
                 ),
-                ListTile(
-                  leading: const Icon(Icons.exit_to_app, color: Colors.red),
-                  title: const Text('Quitter le groupe',
-                      style: TextStyle(color: Colors.red)),
-                  onTap: () {
-                    // Handle "Quitter le groupe"
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.thumb_down, color: Colors.red),
-                  title: const Text('Signaler le groupe',
-                      style: TextStyle(color: Colors.red)),
-                  onTap: () {
-                    // Handle "Signaler le groupe"
-                  },
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 7,
+                          offset: const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.person_add, color: Color.fromARGB(255, 244, 197, 52)),
+                          title: const Text(
+                            'Ajouter un membre',
+                            style: TextStyle(color: Color.fromARGB(255, 244, 197, 52)),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddMembersScreen(),
+                            ));
+                          },
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.exit_to_app, color: Colors.red),
+                          title: const Text(
+                            'Quitter le groupe',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          onTap: () {
+                            // Handle "Quitter le groupe"
+                          },
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.thumb_down, color: Colors.red),
+                          title: const Text(
+                            'Signaler le groupe',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          onTap: () {
+                            // Handle "Signaler le groupe"
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -302,27 +391,26 @@ class _PlusOptionState extends State<PlusOption> {
       ),
     );
   }
-void handleMenuSelection(BuildContext context, String choice) {
-  // This function can handle various actions based on the menu choice
-  // Example of navigating or displaying a message
-  switch (choice) {
-    case 'Ajouter des membres':
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => AddMembersScreen(),
-      ));
-      break;
-    case 'Changer le nom du groupe':
-      _navigateToChangeGroupName();
-      break;
-    case 'Autorisations du groupe':
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => GroupPermissionsScreen(),
-      ));
-      break;
-    default:
-      print('Unknown option: $choice');
+
+  void handleMenuSelection(BuildContext context, String choice) {
+    switch (choice) {
+      case 'Ajouter des membres':
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => AddMembersScreen(),
+        ));
+        break;
+      case 'Changer le nom du groupe':
+        _navigateToChangeGroupName();
+        break;
+      case 'Autorisations du groupe':
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => GroupPermissionsScreen(),
+        ));
+        break;
+      default:
+        print('Unknown option: $choice');
+    }
   }
-}
 }
 
 class GroupActionButton extends StatelessWidget {
@@ -330,10 +418,10 @@ class GroupActionButton extends StatelessWidget {
   final String label;
 
   const GroupActionButton({
-    super.key,
     required this.icon,
     required this.label,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

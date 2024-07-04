@@ -66,7 +66,7 @@ class TOnBoardingNavigationBar extends StatelessWidget {
     elevation: 3,
     shadowColor: Colors.black,
   ),
-  backgroundColor: Colors.white, // Set the background color of the Scaffold
+  backgroundColor: Colors.white, 
   body: Column(
     children: [
       Container(
@@ -75,8 +75,8 @@ class TOnBoardingNavigationBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildOnboardingButton(context, 0, controller, 'Fichier'),
-            _buildOnboardingButton(context, 1, controller, 'Discussion'),
+            _buildOnboardingButton(context, 0, controller, 'Discussion'),
+            _buildOnboardingButton(context, 1, controller, 'Fichier'),
             _buildOnboardingButton(context, 2, controller, 'Media'),
           ],
         ),
@@ -86,8 +86,8 @@ class TOnBoardingNavigationBar extends StatelessWidget {
           controller: controller.pageController,
           onPageChanged: controller.updatePageIndicator,
           children: [
-            PdfListScreen(),
             GroupChatScreen(),
+            PdfListScreen(),
             GroupMediaWidget(),
           ],
         ),

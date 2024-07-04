@@ -117,7 +117,7 @@ class _GroupMediaDescriptionWidgetState extends State<GroupMediaDescriptionWidge
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.yellow[700],
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
         ),
         child: const Text('Ajouter un utilisateur', style: TextStyle(fontSize: 16 , color: Colors.white)),
       ),
