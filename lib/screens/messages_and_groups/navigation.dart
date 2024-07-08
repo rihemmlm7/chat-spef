@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:massage/screens/messages_and_groups/widgets/navigation_widgets/floating_action_button.dart';
-
+import 'package:massage/pages/home.dart';
 import 'widgets/chat.dart';
 import 'widgets/group_chat.dart';
 import 'controllers/main_controller.dart';
@@ -20,9 +20,14 @@ class OnBoardingScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: Color(0xFF2A343D)),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          ),
         ),
-        title:  Obx((){ return Text( controller.currentPageIndex.value == 0 ?'Messages' : 'Groups');}),
+        title: Obx(() {
+          return Text(controller.currentPageIndex.value == 0 ? 'Messages' : 'Groups');
+        }),
         elevation: 3,
         shadowColor: Colors.black,
       ),
@@ -35,15 +40,10 @@ class OnBoardingScreen extends StatelessWidget {
             children: const [
               HomePageWidget(),
               GroupsPageWidget(),
-
             ],
           ),
-
-
           ///  Navigation buttons
           const TOnBoardingDotNavigation(),
-
-
         ],
       ),
       floatingActionButton: const FloatingButton(),

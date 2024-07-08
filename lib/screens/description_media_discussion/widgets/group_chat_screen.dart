@@ -45,7 +45,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       avatarUrl: "assets/images/user.png",
     ),
     ChatMessage(
-      messageContent: "Indeed, the earlier we can",
+      messageContent: "Indeed, the earlier we c",
       senderName: "Jane Smith",
       messageType: "receiver",
       timestamp: DateTime.now().subtract(const Duration(minutes: 2)),
