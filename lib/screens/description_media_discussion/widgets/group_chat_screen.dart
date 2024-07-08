@@ -85,59 +85,75 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     });
   }
 
-  void _showOptions(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Photo Library'),
-                onTap: () {
-                  _sendImage(fromCamera: false);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.photo_camera),
-                title: const Text('Camera'),
-                onTap: () {
-                  _sendImage(fromCamera: true);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.video_library),
-                title: const Text('Vidéo Library'),
-                onTap: () {
-                  _sendVideo(fromCamera: false);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.video_camera_back),
-                title: const Text('Caméra Vidéo'),
-                onTap: () {
-                  _sendVideo(fromCamera: true);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.attach_file),
-                title: const Text('Fichier PDF'),
-                onTap: () {
-                  _sendPDF();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+void _showOptions(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext bc) {
+      return Center(
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8, // Set your desired width here
+            padding: const EdgeInsets.all(25),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text('Photo Library'),
+                  onTap: () {
+                    _sendImage(fromCamera: false);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const Divider(color: Colors.grey),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Camera'),
+                  onTap: () {
+                    _sendImage(fromCamera: true);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const Divider(color: Colors.grey),
+                ListTile(
+                  leading: const Icon(Icons.video_library),
+                  title: const Text('Video Library'),
+                  onTap: () {
+                    _sendVideo(fromCamera: false);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const Divider(color: Colors.grey),
+                ListTile(
+                  leading: const Icon(Icons.video_camera_back),
+                  title: const Text('Camera Video'),
+                  onTap: () {
+                    _sendVideo(fromCamera: true);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const Divider(color: Colors.grey),
+                ListTile(
+                  leading: const Icon(Icons.attach_file),
+                  title: const Text('PDF File'),
+                  onTap: () {
+                    _sendPDF();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 
   Future<void> _sendImage({required bool fromCamera}) async {
     final XFile? pickedFile = await _picker.pickImage(

@@ -46,7 +46,9 @@ class _AddMembersScreenState extends State<AddClientScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor:Colors.white,
       appBar: AppBar(
+        backgroundColor:Colors.white,
         title: const Text('Ajouter des membres'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -61,9 +63,12 @@ class _AddMembersScreenState extends State<AddClientScreen> {
               // Handle search action
             },
           ),
+          
         ],
+        elevation: 2,
       ),
       body: Column(
+       
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(

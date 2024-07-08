@@ -22,7 +22,7 @@ class _PlusOptionState extends State<PlusOption> {
 
   final List<Map<String, String>> interesses = [
     {
-      'name': 'Maria',
+     'name': 'Maria',
       'status': 'Le rôle de cet membre.',
     },
     {

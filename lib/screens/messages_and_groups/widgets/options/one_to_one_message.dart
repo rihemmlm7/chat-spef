@@ -55,30 +55,32 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _showOptions(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text('Photo Library'),
-                    onTap: () {
-                      _sendImage(fromCamera: false);
-                      Navigator.of(context).pop();
-                    }),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    _sendImage(fromCamera: true);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        }
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Photo Library'),
+                onTap: () {
+                  _sendImage(fromCamera: false);
+                  Navigator.of(context).pop();
+                },
+              ),
+              const Divider(color: Colors.grey),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
+                  _sendImage(fromCamera: true);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -123,7 +125,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child:ListView.builder(
+            child: ListView.builder(
               reverse: true,
               itemCount: messages.length,
               itemBuilder: (context, index) {
@@ -135,93 +137,90 @@ class _ChatScreenState extends State<ChatScreen> {
                 double imageHeight = imageSize * 1.2; // 20% taller than its width
 
                 return Row(
-                    mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-                    children: [
-                if (!isMe && msg.imageFile == null)
-                CircleAvatar(
-                  backgroundImage: AssetImage(msg.avatarUrl),
-                  radius: 16,
-                ),
-                GestureDetector(
-                onTap: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => FullScreenImagePage(imageFile: msg.imageFile!),
-                ),
-                );
-                },
-                child: msg.imageFile != null ? Container(
-                margin: EdgeInsets.only(top: 10, bottom: 10, left: isMe ? 0 : 10, right: isMe ? 10 : 0),
-                child: ClipRRect(
-                borderRadius: BorderRadius.circular(8), // Slightly rounded corners for aesthetics
-                child: Image.file(
-                msg.imageFile!,
-                width: imageSize,
-                height: imageHeight, // Height is now 120% of the width
-                fit: BoxFit.cover,
-                ),
-                ),
-                ) : Container(
-                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-           topLeft: const Radius.circular(20),
-      topRight: const Radius.circular(20),
-      bottomLeft: Radius.circular(isMe ? 20 : 0),
-      bottomRight: Radius.circular(isMe ? 0 : 20),
-                
-                ),
-        color: isMe ? const Color(0xFFF4C534) : Colors.grey[200],
-  ),
-                child: Column(
-                crossAxisAlignment: isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-                children: [
-                Text(
-                msg.messageContent,
-                softWrap: true,
-                style: TextStyle(color: isMe ? Colors.white : Colors.black),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                DateFormat('hh:mm a').format(msg.timestamp),
-                style: TextStyle(
-                fontSize: 10,
-                color: isMe ? Colors.white : Colors.black45,
-                ),
-                softWrap: true,
-                ),
-                ],
-                ),
-                ),
-                ),
-                ],
+                  mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+                  children: [
+                    if (!isMe && msg.imageFile == null)
+                      CircleAvatar(
+                        backgroundImage: AssetImage(msg.avatarUrl),
+                        radius: 16,
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullScreenImagePage(imageFile: msg.imageFile!),
+                          ),
+                        );
+                      },
+                      child: msg.imageFile != null
+                          ? Container(
+                              margin: EdgeInsets.only(
+                                top: 10,
+                                bottom: 10,
+                                left: isMe ? 0 : 10,
+                                right: isMe ? 10 : 0,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8), // Slightly rounded corners for aesthetics
+                                child: Image.file(
+                                  msg.imageFile!,
+                                  width: imageSize,
+                                  height: imageHeight, // Height is now 120% of the width
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              constraints: BoxConstraints(
+                                maxWidth: MediaQuery.of(context).size.width * 0.75,
+                              ),
+                              margin: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: const Radius.circular(20),
+                                  topRight: const Radius.circular(20),
+                                  bottomLeft: Radius.circular(isMe ? 20 : 0),
+                                  bottomRight: Radius.circular(isMe ? 0 : 20),
+                                ),
+                                color: isMe ? const Color(0xFFF4C534) : Colors.grey[200],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    msg.messageContent,
+                                    softWrap: true,
+                                    style: TextStyle(color: isMe ? Colors.white : Colors.black),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    DateFormat('hh:mm a').format(msg.timestamp),
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: isMe ? Colors.white : Colors.black45,
+                                    ),
+                                    softWrap: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                    ),
+                  ],
                 );
               },
             ),
-
-
-
-
-
-
-
           ),
           Padding(
-            
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
             child: Row(
-              
               children: <Widget>[
-                
                 IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () => _showOptions(context),
                 ),
                 Expanded(
-                  
                   child: TextField(
                     controller: _controller,
                     decoration: InputDecoration(
@@ -251,9 +250,11 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
+
+void main() => runApp(const MaterialApp(home: ChatScreen()));
