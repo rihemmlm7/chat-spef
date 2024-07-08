@@ -217,10 +217,11 @@ Event? newEvent;
               Expanded(
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>OnBoardingScreen()),
-                    );
+                Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => const OnBoardingScreen()),
+);
+
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

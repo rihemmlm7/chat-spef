@@ -8,8 +8,7 @@ class TOnBoardingDotNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = OnBoardingController
-        .instance; // Make sure this is correctly defined somewhere
+    final controller = OnBoardingController.instance;
 
     return Positioned(
       top: 10,
@@ -22,8 +21,7 @@ class TOnBoardingDotNavigation extends StatelessWidget {
     );
   }
 
-  Widget _buildToggleButtons(
-      BuildContext context, OnBoardingController controller) {
+  Widget _buildToggleButtons(BuildContext context, OnBoardingController controller) {
     return Center(
       child: Align(
         alignment: const AlignmentDirectional(0, 0),
@@ -57,27 +55,21 @@ class TOnBoardingDotNavigation extends StatelessWidget {
     );
   }
 
-  Widget _buildOnboardingButton(BuildContext context, int pageIndex,
-      OnBoardingController controller, String name) {
+  Widget _buildOnboardingButton(BuildContext context, int pageIndex, OnBoardingController controller, String name) {
     return Expanded(
       child: InkWell(
         onTap: () => controller.navigateToPage(pageIndex),
         child: Obx(() {
-          // Wrap the Container with Obx() to listen for changes
           return Container(
             decoration: BoxDecoration(
-              color: controller.currentPageIndex.value == pageIndex
-                  ? Colors.white
-                  : Colors.transparent,
+              color: controller.currentPageIndex.value == pageIndex ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(80),
             ),
             child: Center(
               child: Text(
                 name,
                 style: TextStyle(
-                  color: controller.currentPageIndex.value == pageIndex
-                      ? Colors.black
-                      : const Color(0xFF4f4f4f),
+                  color: controller.currentPageIndex.value == pageIndex ? Colors.black : const Color(0xFF4f4f4f),
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

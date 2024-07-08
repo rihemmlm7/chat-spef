@@ -13,8 +13,13 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Controller for managing onboarding logic and state.
     final controller = Get.put(OnBoardingController());
+
+    // Reset the controller state to show "Messages" tab initially
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.reset();
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -33,7 +38,6 @@ class OnBoardingScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          /// Horizontal Scrollable Pages
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndicator,
@@ -42,7 +46,6 @@ class OnBoardingScreen extends StatelessWidget {
               GroupsPageWidget(),
             ],
           ),
-          ///  Navigation buttons
           const TOnBoardingDotNavigation(),
         ],
       ),
