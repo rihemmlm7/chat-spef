@@ -20,7 +20,9 @@ class TOnBoardingNavigationBar extends StatelessWidget {
         builder: (context) => const PlusOption(),
       ));
     }
-
+  WidgetsBinding.instance!.addPostFrameCallback((_) {
+      controller.navigateToPage(0); 
+    });
     return Scaffold(
   appBar: AppBar(
     backgroundColor: Colors.white,
@@ -84,7 +86,7 @@ class TOnBoardingNavigationBar extends StatelessWidget {
       Expanded(
         child: PageView(
           controller: controller.pageController,
-          onPageChanged: controller.updatePageIndicator,
+         onPageChanged: controller.updatePageIndicator,
           children: [
             GroupChatScreen(),
             PdfListScreen(),
