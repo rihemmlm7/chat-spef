@@ -21,18 +21,8 @@ class _PlusOptionState extends State<PlusOption> {
   final picker = ImagePicker();
 
   final List<Map<String, String>> interesses = [
-    {
-     'name': 'Maria',
-      'status': 'Le rôle de cet membre.',
-    },
-    {
-      'name': '👑Lil Shine👑',
-      'status': 'Le rôle de cet membre',
-    },
-    {
-      'name': 'A_m',
-      'status': 'Le rôle de cet membre',
-    },
+
+
     {
       'name': 'Abdellah',
       'status': 'Le rôle de cet membre',
@@ -178,6 +168,7 @@ class _PlusOptionState extends State<PlusOption> {
               child: Text('Groupe • 2 membres'),
             ),
             const SizedBox(height: 20),
+            // ignore: prefer_const_constructors
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -331,7 +322,7 @@ class _PlusOptionState extends State<PlusOption> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(

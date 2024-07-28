@@ -7,7 +7,7 @@ class NewGroupDetailModel {
   FocusNode textFieldFocusNode2 = FocusNode();
   TextEditingController textController3 = TextEditingController();
   FocusNode textFieldFocusNode3 = FocusNode();
-  String? dropDownValue;
+  List<String> selectedClients = [];
 }
 
 class NewGroupDetailWidget extends StatefulWidget {
@@ -19,6 +19,11 @@ class NewGroupDetailWidget extends StatefulWidget {
 
 class _NewGroupDetailWidgetState extends State<NewGroupDetailWidget> {
   final NewGroupDetailModel _model = NewGroupDetailModel();
+  final List<String> _clientOptions = [
+    'Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5',
+    'Option 6', 'Option 7', 'Option 8', 'Option 9', 'Option 10',
+    'Option 11', 'Option 12'
+  ];
 
   @override
   void dispose() {
@@ -34,6 +39,7 @@ class _NewGroupDetailWidgetState extends State<NewGroupDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Nouveau Groupe'),
         leading: IconButton(
@@ -44,16 +50,21 @@ class _NewGroupDetailWidgetState extends State<NewGroupDetailWidget> {
         elevation: 1,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildInputField(_model.textController1, 'Nom de groupe'),
-              _buildDropdown('Sélectionner Client', ['Option 1', 'Option 2']),
-              _buildInputField(_model.textController2, 'Sujet'),
-              _buildMultiLineInputField(_model.textController3, 'Description'),
-            ],
+        child: Container(
+          color: Colors.white,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildInputField(_model.textController1, 'Nom de groupe'),
+                _buildDropdown('Sélectionner Client', _clientOptions),
+                const SizedBox(height: 16.0), // Add space between dropdown and chips
+                _buildSelectedChips(),
+                _buildInputField(_model.textController2, 'Sujet'),
+                _buildMultiLineInputField(_model.textController3, 'Description'),
+              ],
+            ),
           ),
         ),
       ),
@@ -93,7 +104,9 @@ class _NewGroupDetailWidgetState extends State<NewGroupDetailWidget> {
           child: Text(label, style: Theme.of(context).textTheme.titleMedium),
         ),
         DropdownButtonFormField<String>(
-          value: _model.dropDownValue,
+          value: null,
+          isExpanded: true,
+          dropdownColor: Colors.white,
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -105,12 +118,35 @@ class _NewGroupDetailWidgetState extends State<NewGroupDetailWidget> {
             );
           }).toList(),
           onChanged: (String? newValue) {
-            setState(() {
-              _model.dropDownValue = newValue;
-            });
+            if (newValue != null && !_model.selectedClients.contains(newValue)) {
+              setState(() {
+                _model.selectedClients.add(newValue);
+              });
+            }
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildSelectedChips() {
+    return Wrap(
+      spacing: 8.0,
+      children: _model.selectedClients.map((client) {
+        return Chip(
+          label: Text(client),
+          backgroundColor: Color.fromARGB(255, 250, 214, 106), 
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            side: BorderSide(color: Colors.amber, width:1),
+          ),
+          onDeleted: () {
+            setState(() {
+              _model.selectedClients.remove(client);
+            });
+          },
+        );
+      }).toList(),
     );
   }
 
